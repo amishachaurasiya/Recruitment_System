@@ -1,126 +1,155 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 
 <!DOCTYPE html>
 
-<html lang="en">
+<html>
 
 <head>
 
-    <meta charset="UTF-8">
+  <meta charset="UTF-8">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Online Recruitment System</title>
 
-    <title>Login Page</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
-    <link rel="stylesheet" href="styles.css">
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <style>
 
+    body {
 
-    <script>
+      background-color: #f8f9fa;
 
-        let loginAttempts = 0;
+      display: flex;
 
-        function validateForm() {
+      justify-content: center;
 
-          const email = document.getElementById('email').value;
+      align-items: center;
 
-          const password = document.getElementById('password').value;
+      height: 100vh;
 
-          const errorMessage = document.getElementById('error-message');
+      margin: 0;
 
+    }
 
+    .login-container {
 
-          // Simulated login check (for demonstration purposes)
+      background-color: #ffffff;
 
-          const validEmail = "user@example.com"; // Replace with actual validation logic
+      padding: 40px;
 
-          const validPassword = "password123"; // Replace with actual validation logic
+      border-radius: 10px;
 
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
 
+      width: 300px;
 
-          // Check email and password
+    }
 
-          if (email === validEmail && password === validPassword) {
+    h2 {
 
-            alert("Login successful!");
+      text-align: center;
 
-            // Redirect or proceed to the next page/functionality
+      margin-bottom: 20px;
 
-            return true;
+      color: #007bff;
 
-          } else {
+    }
 
-            loginAttempts++;
+    .error-message {
 
-            errorMessage.innerText = "Invalid email or password.";
+      color: red;
 
+      text-align: center;
 
+      margin-bottom: 15px;
 
-            if (loginAttempts >= 3) {
+    }
 
-              errorMessage.innerText = "Account locked due to too many failed attempts.";
+    .register-link {
 
-              document.getElementById('loginForm').reset(); // Reset form
+      text-align: center;
 
-              return false;
+      margin-top: 20px;
 
-            }
+    }
 
-            return false;
+    .register-link a {
 
-          }
+      color: #007bff;
 
-        }
+      text-decoration: none;
 
+    }
 
+    .register-link a:hover {
 
-        function showHelp() {
+      text-decoration: underline;
 
-          alert("Help: Use your assigned email and password to log in. \nContact your admin if you have any issues.");
+    }
 
-        }
-
-    </script>
+  </style>
 
 </head>
 
 <body>
 
-<div class="container">
 
-    <h2>Login</h2>
 
-    <form id="loginForm" onsubmit="return validateForm()">
+<div class="login-container">
 
-        <div class="form-group">
+  <h2>Login</h2>
 
-            <label for="email">Email:</label>
 
-            <input type="email" id="email" name="email" required>
 
-        </div>
+  <form action="LoginServlet" method="post">
 
-        <div class="form-group">
+    <div class="mb-3">
 
-            <label for="password">Password:</label>
+      <label for="email" class="form-label">Email:</label>
 
-            <input type="password" id="password" name="password" required>
-
-        </div>
-
-        <div id="error-message" class="error"></div>
-
-        <button type="submit">Login</button>
-
-    </form>
-
-    <div class="help">
-
-        <a href="help.jsp" onclick="showHelp()">Need Help?</a>
+      <input type="email" id="email" name="email" class="form-control" required>
 
     </div>
 
+    <div class="mb-3">
+
+      <button type="submit" class="btn btn-primary w-100">Login</button>
+      <a href="help.jsp">Need Help ?</a>
+
+    </div>
+
+  </form>
+
+
+
+  <%
+
+  Object error = request.getAttribute("errorMessage");
+
+  if (error != null) {
+
+  %>
+
+    <div class="error-message"><%= error %></div>
+
+  <%
+
+  }
+
+  %>
+
+
+
+  <div class="register-link">
+
+    <p>Not registered? <a href="EmployerRegistration.jsp">Register here</a></p>
+
+  </div>
+
 </div>
+
+
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-vZ8sJxvU1sMN/Xm2lEUoRgL6z89xT6FW4TKM7u9F2m4cZbC39GgE/Pjog2Vv6z4F" crossorigin="anonymous"></script>
 
 </body>
 
